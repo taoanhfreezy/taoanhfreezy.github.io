@@ -373,6 +373,107 @@
     .taf-community-item {padding:18px;}
     .taf-rules-body {padding:15px;}
 }
+
+.taf-rules-body-new {padding:20px; display:flex; flex-direction:column; gap:13px;}
+.taf-rules-body-new .taf-rule-text {
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    padding:13px 15px;
+    color:#334155;
+    font-size:14px;
+    line-height:1.8;
+    overflow-wrap:anywhere;
+}
+.taf-rules-body-new .taf-rule-separator {
+    height:1px;
+    background:#cbd5e1;
+    margin:2px 0;
+}
+@media(max-width:600px) {
+    .taf-rules-body-new {padding:13px; gap:10px;}
+    .taf-rules-body-new .taf-rule-text {padding:12px; font-size:13px;}
+}
+
+
+/* GIAO DIỆN QUY TẮC TEST */
+
+.taf-rules-intro {
+    padding:16px 20px 0;
+    color:#9a3412;
+    font-size:14px;
+    font-weight:700;
+    line-height:1.8;
+}
+@media(max-width:600px) {
+    .taf-rules-intro {padding:14px 14px 0;font-size:13px;}
+}
+.taf-rules {
+    border:1px solid #fed7aa;
+    border-radius:18px;
+    background:linear-gradient(180deg,#fffaf5 0%,#ffffff 38%);
+    box-shadow:0 8px 26px rgba(154,52,18,.08);
+}
+.taf-rules-title {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:17px 20px;
+    color:#fff;
+    background:linear-gradient(120deg,#ea580c 0%,#f97316 55%,#fb923c 100%);
+}
+.taf-rules-title-mark {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:40px;
+    height:40px;
+    flex:0 0 40px;
+    border:1px solid rgba(255,255,255,.45);
+    border-radius:12px;
+    background:rgba(255,255,255,.18);
+    font-size:17px;
+    font-weight:800;
+}
+.taf-rules-title h3 {
+    margin:0;
+    font-size:19px;
+    line-height:1.3;
+    letter-spacing:.6px;
+    font-weight:800;
+}
+.taf-rules-body-new {
+    padding:18px;
+    gap:12px;
+}
+.taf-rules-body-new .taf-rule-text {
+    position:relative;
+    padding:16px 17px;
+    border:1px solid #e5e7eb;
+    border-left:4px solid #fb923c;
+    border-radius:13px;
+    background:#fff;
+    color:#334155;
+    font-size:14px;
+    line-height:1.85;
+    box-shadow:0 3px 10px rgba(15,23,42,.035);
+}
+.taf-rules-body-new .taf-rule-text:first-child {border-left-color:#ea580c;}
+.taf-rules-body-new .taf-rule-text:nth-child(2) {border-left-color:#0ea5e9;}
+.taf-rules-body-new .taf-rule-text:nth-child(3) {border-left-color:#16a34a;}
+.taf-rules-body-new .taf-rule-separator {
+    height:2px;
+    border-radius:2px;
+    background:linear-gradient(90deg,#fed7aa,transparent);
+}
+@media(max-width:600px) {
+    .taf-rules-title {padding:14px 15px;gap:10px;}
+    .taf-rules-title-mark {width:36px;height:36px;flex-basis:36px;font-size:15px;}
+    .taf-rules-title h3 {font-size:17px;}
+    .taf-rules-body-new {padding:12px;gap:10px;}
+    .taf-rules-body-new .taf-rule-text {padding:12px 13px;font-size:13px;line-height:1.8;}
+}
+
 </style>
 </head>
 
@@ -473,7 +574,7 @@
              alt="Hướng dẫn thiết lập Google Play Console"
              loading="lazy">
 
-        <div class="taf-subtitle">Thêm địa chỉ email ở mục Google Group</div>
+        <div class="taf-subtitle">Thêm địa chỉ email vào mục Google Group</div>
 
         <p>Copy 2 địa chỉ email bên dưới và dán vào mục Google Group trong phần thiết lập người thử nghiệm.</p>
 
@@ -516,9 +617,42 @@
 
     <!-- QUY TẮC TEST CHÉO -->
     <section class="taf-rules">
+        <div class="taf-rules-title">
+            <span class="taf-rules-title-mark">14</span>
+            <h3>TIÊU CHUẨN TEST</h3>
+        </div>
+        <div class="taf-rules-intro">Tiêu chuẩn test đạt yêu cầu, và chưa đạt yêu cầu để vượt qua 14 ngày closed test (thử nghiệm khép kín) của Google, chúng ta có 14 điều luật sau:</div>
+        <div class="taf-rules-body taf-rules-body-new">
+            <div class="taf-rule-text">1. Qua khỏi màn chờ / loading / màn đăng nhập <br>
+2. Test tầm 30 giây <br>
+3. Bấm ít nhất 2 chỗ/2 nút<br>
+4. Ảnh khác nhau trong vòng 3 ngày<br>
+5. App không cài được / mở là đứng / crash → bấm "Không tải được" <br>
+6. Đối với app ít màn hình: chủ app phải chấp nhận những ảnh giống nhau, nếu không thì tester ngán test <br>
+7. KHÔNG khuyến khích watermark (chèn vào ảnh) không phải là nội dung chính để Hộp đồng người phán xử căn cứ<br>
+8. Khuyến khích: chủ app tạo sẵn ngày giờ trong app của mình, để khi tester chụp hình thì có sẵn<br>
+9. CẤM: Bot script test tự động, phone farm. Mình sẽ cố gắng fix để chặn việc này/ban account trong thời gian tới. <br>
+Cũng khó xử lý triệt để vì anh em thông minh quá, mong mọi người chung sức vì cộng đồng sạch đẹp, uy tín. <br>
+    </div>
+<div class="taf-rule-text">
+
+<h4> Chủ app KHÔNG được yêu cầu test:</h4>
+10. Chơi qua màn, lên level <br>
+11. đăng nhập bằng tài khoản thật, điền thông tin cá nhân thật, chủ app BẮT BUỘC cung cấp account test <br>
+12. dùng hết tính năng
+</div>
+ <div class="taf-rule-text">
+<h4> Tester có quyền:</h4>
+13. Tester có quyền: từ chối với và Không khuyến khích chủ app đòi quyền nhạy cảm: camera, danh bạ, vị trí, overlay, đọc thông báo </div>
+            <div class="taf-rule-text">
+14. nhóm chúng ta trước giờ có uy tín với google, app nào cũng ấp thành công hết, mọi người cố gắng làm chuẩn, để không bị google từ chối, mất công test lại 14 ngày dài đằng đẵng Mọi người bàn bạc thêm để chúng ta thống nhất cùng thực hiện: chủ app, tester, hội đồng phán xử căn cứ tiêu chuẩn chung để thực hiện.</div>
+        </div>
+    </section>
+
+    <section class="taf-rules">
 
         <div class="taf-rules-header">
-            <h3>❤️ QUY TẮC TEST CHÉO – ANH EM CỨU BỒ NHAU!</h3>
+            <h3>❤️ANH EM CỨU BỒ NHAU!</h3>
             <p>Một chút chân thành sẽ giúp cả cộng đồng cùng hoàn thành mục tiêu.</p>
         </div>
 
@@ -528,7 +662,7 @@
                 <div class="taf-rule-icon">📱</div>
                 <div class="taf-rule-text">
                     <b>Test thật tâm một chút nhé!</b>
-                    Vào ứng dụng ngắm nghía khoảng 20 giây, bấm thử vài chức năng để có tương tác thực tế. Đừng vừa mở app đã tắt ngay nhé!
+                    Vào ứng dụng ngắm nghía khoảng 30 giây, bấm thử vài chức năng để có tương tác thực tế. Đừng vừa mở app đã tắt ngay nhé!
                 </div>
             </div>
 
@@ -566,7 +700,6 @@
         </div>
     </section>
 
-    <!-- CỘNG ĐỒNG -->
     <section class="taf-step taf-community">
 
         <h3 class="taf-community-title">💙 THAM GIA CỘNG ĐỒNG TEST CHÉO</h3>
