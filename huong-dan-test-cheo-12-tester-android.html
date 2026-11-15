@@ -1,0 +1,678 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hướng dẫn Test chéo 12 Tester Android</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<style>
+.taf-test {
+    --taf-blue: #2563eb;
+    --taf-dark: #172554;
+    --taf-text: #334155;
+    --taf-muted: #64748b;
+    font-family:"Lexend", sans-serif;
+    color: var(--taf-text);
+    max-width: 900px;
+    margin: 25px auto;
+    padding: 15px;
+    line-height: 1.7;
+    box-sizing: border-box;
+}
+.taf-test * {box-sizing:border-box;}
+
+.taf-header {
+    text-align:center;
+    padding:30px 18px;
+    border-radius:20px;
+    background:linear-gradient(135deg,#dbeafe,#eef2ff,#f5f3ff);
+    margin-bottom:24px;
+}
+.taf-header h2 {
+    font-size:25px;
+    color:var(--taf-dark);
+    font-weight:800;
+    margin:0 0 8px;
+}
+.taf-header p {margin:0;color:#475569;font-size:14px;}
+
+.taf-tag {
+    display:inline-block;
+    background:#fff;
+    color:#2563eb;
+    padding:5px 13px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.taf-step {
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:18px;
+    padding:22px;
+    margin-bottom:20px;
+    box-shadow:0 5px 22px rgba(15,23,42,.05);
+}
+
+.taf-step-title {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:18px;
+}
+.taf-number {
+    width:40px;
+    height:40px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:12px;
+    background:var(--taf-blue);
+    color:#fff;
+    font-size:19px;
+    font-weight:800;
+}
+.taf-step-title h3 {
+    margin:0;
+    font-size:19px;
+    color:var(--taf-dark);
+    line-height:1.4;
+}
+
+.taf-content {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+}
+.taf-app-info {
+    flex:1;
+    min-width:220px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+.taf-logo {
+    width:85px;
+    height:85px;
+    object-fit:contain;
+    border-radius:17px;
+    flex-shrink:0;
+}
+.taf-app-info p {margin:0 0 12px;font-size:15px;}
+
+.taf-btn {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    padding:11px 18px;
+    border-radius:10px;
+    background:#2563eb;
+    color:#fff!important;
+    font-size:14px;
+    font-weight:700;
+    text-decoration:none!important;
+    transition:.2s;
+}
+.taf-btn:hover {background:#1d4ed8;transform:translateY(-2px);}
+
+.taf-qr {
+    width:145px;
+    flex-shrink:0;
+    text-align:center;
+}
+.taf-qr img {
+    width:130px;
+    height:130px;
+    object-fit:contain;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    padding:5px;
+    background:#fff;
+}
+.taf-qr span {
+    display:block;
+    font-size:12px;
+    color:var(--taf-muted);
+    margin-top:5px;
+}
+
+.taf-warning {
+    display:flex;
+    gap:10px;
+    padding:14px;
+    border-radius:12px;
+    background:#fff7ed;
+    border:1px solid #fed7aa;
+    color:#9a3412;
+    font-size:14px;
+    margin-top:20px;
+}
+.taf-warning b {display:block;margin-bottom:3px;}
+
+.taf-group-link {
+    display:block;
+    padding:12px 15px;
+    border-radius:10px;
+    background:#eff6ff;
+    color:#1d4ed8!important;
+    font-weight:700;
+    text-decoration:none!important;
+    overflow-wrap:anywhere;
+}
+.taf-group-link:hover {background:#dbeafe;}
+
+.taf-subtitle {
+    font-size:16px;
+    font-weight:700;
+    color:var(--taf-dark);
+    margin:20px 0 10px;
+}
+.taf-note {font-size:14px;color:var(--taf-muted);}
+
+.taf-email-box {
+    background:#f1f5f9;
+    border:1px dashed #94a3b8;
+    padding:15px;
+    border-radius:12px;
+    margin:12px 0;
+}
+.taf-email {
+    display:block;
+    font-size:14px;
+    font-weight:700;
+    color:#1e40af;
+    overflow-wrap:anywhere;
+    padding:4px 0;
+}
+.taf-copy {
+    border:0;
+    background:#0f172a;
+    color:#fff;
+    padding:10px 16px;
+    border-radius:9px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:10px;
+}
+.taf-copy:hover {background:#334155;}
+.taf-success {color:#15803d;font-size:13px;margin-left:8px;}
+
+.taf-guide-img {
+    display:block;
+    width:100%;
+    height:auto;
+    border-radius:12px;
+    border:1px solid #e2e8f0;
+    margin:12px 0;
+}
+.taf-video {
+    position:relative;
+    width:100%;
+    padding-bottom:56.25%;
+    height:0;
+    overflow:hidden;
+    border-radius:14px;
+    margin-top:12px;
+    background:#0f172a;
+}
+.taf-video iframe {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    border:0;
+}
+
+/* QUY TẮC TEST CHÉO */
+.taf-rules {
+    border-radius:18px;
+    overflow:hidden;
+    border:1px solid #fed7aa;
+    margin-bottom:22px;
+    background:#fff;
+    box-shadow:0 5px 22px rgba(15,23,42,.05);
+}
+.taf-rules-header {
+    padding:17px 20px;
+    background:linear-gradient(135deg,#f97316,#ea580c);
+    color:#fff;
+}
+.taf-rules-header h3 {
+    margin:0;
+    font-size:19px;
+}
+.taf-rules-header p {
+    margin:4px 0 0;
+    font-size:13px;
+    opacity:.95;
+}
+.taf-rules-body {padding:20px;}
+
+.taf-rule {
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    padding:13px 0;
+    border-bottom:1px solid #f1f5f9;
+}
+.taf-rule:last-child {border-bottom:0;}
+.taf-rule-icon {
+    width:35px;
+    height:35px;
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:#fff7ed;
+    font-size:18px;
+}
+.taf-rule-text {
+    flex:1;
+    font-size:14px;
+}
+.taf-rule-text b {
+    display:block;
+    color:#9a3412;
+    margin-bottom:2px;
+}
+.taf-danger {
+    display:flex;
+    gap:12px;
+    align-items:center;
+    background:#fef2f2;
+    border:1px solid #fecaca;
+    padding:15px;
+    border-radius:12px;
+    color:#b91c1c;
+    margin-top:15px;
+}
+.taf-danger-icon {font-size:26px;flex-shrink:0;}
+.taf-danger b {font-size:15px;display:block;}
+.taf-danger span {font-size:13px;}
+
+.taf-thanks {
+    text-align:center;
+    padding:18px 12px;
+    background:#f0fdf4;
+    border:1px solid #bbf7d0;
+    border-radius:12px;
+    margin-top:15px;
+    color:#166534;
+    font-weight:700;
+    font-size:15px;
+}
+
+/* CỘNG ĐỒNG */
+.taf-community {margin-top:25px;}
+.taf-community-title {
+    text-align:center;
+    color:var(--taf-dark);
+    font-size:21px;
+    margin-bottom:16px;
+}
+.taf-community-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+.taf-community-item {
+    border:1px solid #e2e8f0;
+    border-radius:16px;
+    padding:20px 15px;
+    text-align:center;
+    background:#fff;
+}
+.taf-community-item h4 {
+    font-size:17px;
+    margin:0 0 12px;
+    color:var(--taf-dark);
+}
+.taf-community-item img {
+    width:135px;
+    height:135px;
+    object-fit:contain;
+    border:1px solid #e2e8f0;
+    padding:5px;
+    border-radius:12px;
+    margin-bottom:12px;
+}
+.taf-facebook {background:#1877f2;}
+.taf-zalo {background:#0068ff;}
+
+.taf-footer {
+    text-align:center;
+    color:var(--taf-muted);
+    font-size:13px;
+    margin-top:22px;
+}
+
+@media(max-width:600px) {
+    .taf-test {padding:8px;}
+    .taf-header h2 {font-size:21px;}
+    .taf-step {padding:16px;}
+    .taf-step-title h3 {font-size:17px;}
+    .taf-content {justify-content:center;}
+    .taf-app-info {width:100%;min-width:0;}
+    .taf-logo {width:72px;height:72px;}
+    .taf-app-info .taf-btn {width:100%;}
+    .taf-qr {width:100%;padding-top:8px;}
+    .taf-qr img {width:150px;height:150px;}
+    .taf-community-grid {grid-template-columns:1fr;}
+    .taf-community-item {padding:18px;}
+    .taf-rules-body {padding:15px;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="taf-test">
+
+    <header class="taf-header">
+        <span class="taf-tag">CỘNG ĐỒNG 12 TESTER ANDROID</span>
+        <h2>HƯỚNG DẪN THAM GIA TEST CHÉO</h2>
+        <p>Cùng hỗ trợ nhau hoàn thành thử nghiệm ứng dụng Android mỗi ngày!</p>
+    </header>
+
+    <!-- BƯỚC 1 -->
+    <section class="taf-step">
+        <div class="taf-step-title">
+            <div class="taf-number">1</div>
+            <h3>Tải ứng dụng Test chéo 12 Tester</h3>
+        </div>
+
+        <div class="taf-content">
+            <div class="taf-app-info">
+                <img class="taf-logo"
+                     src="https://nanieditorapp.github.io/img/testcheo.webp"
+                     alt="Test chéo 12 Tester">
+
+                <div>
+                    <p>Tải ứng dụng để mọi người có thể tham gia test chéo cho nhau mỗi ngày.</p>
+                    <a class="taf-btn"
+                       href="https://play.google.com/store/apps/details?id=com.dmtrinc.testcheo12"
+                       target="_blank" rel="noopener">
+                        <i class="fa-solid fa-cloud-arrow-down"></i> Tải ứng dụng
+                    </a>
+                </div>
+            </div>
+
+            <div class="taf-qr">
+                <img src="https://nanieditorapp.github.io/img/qr-app-test-cheo.png"
+                     alt="QR tải ứng dụng">
+                <span>Quét mã QR để tải ứng dụng</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- BƯỚC 2 -->
+    <section class="taf-step">
+        <div class="taf-step-title">
+            <div class="taf-number">2</div>
+            <h3>Tham gia Google Group</h3>
+        </div>
+
+        <div class="taf-content">
+            <div class="taf-app-info">
+                <div>
+                    <p>Tham gia nhóm Google Group để trở thành thành viên của cộng đồng test chéo.</p>
+                    <a class="taf-btn"
+                       href="https://groups.google.com/g/cong-dong-12-tester-android"
+                       target="_blank" rel="noopener">
+                       <i class="fa-solid fa-people-group"></i> Tham gia Google Group
+                    </a>
+                </div>
+            </div>
+
+            <div class="taf-qr">
+                <img src="https://nanieditorapp.github.io/img/qr-google-group-cheo.png"
+                     alt="QR Google Group">
+                <span>Quét mã QR tham gia nhóm</span>
+            </div>
+        </div>
+
+        <div class="taf-warning">
+            <span>⚠️</span>
+            <div>
+                <b>Lưu ý quan trọng</b>
+                Email tham gia Google Group phải trùng với Email tài khoản Google Play (CH Play) mà bạn sử dụng để thử nghiệm ứng dụng.
+            </div>
+        </div>
+    </section>
+
+    <!-- BƯỚC 3 -->
+    <section class="taf-step">
+        <div class="taf-step-title">
+            <div class="taf-number">3</div>
+            <h3>Thiết lập trong Google Play Console</h3>
+        </div>
+
+        <p>Truy cập Google Play Console, chọn ứng dụng cần thử nghiệm và thiết lập danh sách người thử nghiệm như hình bên dưới.</p>
+
+        <a class="taf-group-link"
+           href="https://play.google.com/console/"
+           target="_blank" rel="noopener">
+            <i class="fa-solid fa-up-right-from-square"></i> Mở Google Play Console
+        </a>
+        <div class="taf-subtitle">Hình ảnh hướng dẫn thiết lập</div>
+
+        <img class="taf-guide-img"
+             src="https://nanieditorapp.github.io/img/hdthietlap.png"
+             alt="Hướng dẫn thiết lập Google Play Console"
+             loading="lazy">
+
+        <div class="taf-subtitle">Thêm Google Group vào phần địa chỉ email</div>
+
+        <p>Copy 2 địa chỉ email bên dưới và dán vào mục Google Group trong phần thiết lập người thử nghiệm.</p>
+
+        <div class="taf-email-box">
+            <span class="taf-email">cong-dong-12-tester-android@googlegroups.com</span>
+            <span class="taf-email">haiphongapp@googlegroups.com</span>
+
+            <button class="taf-copy" type="button" onclick="tafCopyEmails(this)">
+                <i class="fa-solid fa-copy"></i> Sao chép 2 email
+            </button>
+            <span class="taf-success" aria-live="polite"></span>
+        </div>
+
+
+        <div class="taf-subtitle">Hoặc xem video hướng dẫn</div>
+
+        <div class="taf-video">
+           <iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1680738263388432%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>
+        </div>
+
+        <div class="taf-warning">
+            <span>💡</span>
+            <div>
+                <b>Tiếp theo: Sao chép liên kết tham gia Android</b>
+               Sao khi được duyệt, Kéo xuống phần tham gia thử nghiệm trên Android, tìm và sao chép liên kết tham gia như hình bên dưới.
+            </div>
+        </div>
+
+        <div class="taf-subtitle">Sao chép liên kết tham gia trên Android</div>
+
+        <img class="taf-guide-img"
+             src="https://nanieditorapp.github.io/img/saocheplkandroid.png"
+             alt="Hướng dẫn sao chép liên kết Android"
+             loading="lazy">
+
+        <p class="taf-note">
+            Hãy sử dụng liên kết này khi tham gia thử nghiệm ứng dụng Android.
+        </p>
+    </section>
+
+    <!-- QUY TẮC TEST CHÉO -->
+    <section class="taf-rules">
+
+        <div class="taf-rules-header">
+            <h3>❤️ QUY TẮC TEST CHÉO – ANH EM CỨU BỒ NHAU!</h3>
+            <p>Một chút chân thành sẽ giúp cả cộng đồng cùng hoàn thành mục tiêu.</p>
+        </div>
+
+        <div class="taf-rules-body">
+
+            <div class="taf-rule">
+                <div class="taf-rule-icon">📱</div>
+                <div class="taf-rule-text">
+                    <b>Test thật tâm một chút nhé!</b>
+                    Vào ứng dụng ngắm nghía khoảng 20 giây, bấm thử vài chức năng để có tương tác thực tế. Đừng vừa mở app đã tắt ngay nhé!
+                </div>
+            </div>
+
+            <div class="taf-rule">
+                <div class="taf-rule-icon">🤝</div>
+                <div class="taf-rule-text">
+                    <b>Hỗ trợ nhau hết mình</b>
+                    Ai đã được duyệt rồi, vui lòng tiếp tục hỗ trợ các anh em khác test ứng dụng. Đừng quên những người đã giúp mình nhé!
+                </div>
+            </div>
+
+            <div class="taf-rule">
+                <div class="taf-rule-icon">💙</div>
+                <div class="taf-rule-text">
+                    <b>Test có trách nhiệm</b>
+                    Hãy thực hiện đúng hướng dẫn, sử dụng thiết bị thật và dành thời gian trải nghiệm ứng dụng một cách nghiêm túc.
+                </div>
+            </div>
+
+            <div class="taf-danger">
+                <div class="taf-danger-icon">🚫</div>
+                <div>
+                    <b>KHÔNG TEST BẰNG GIẢ LẬP!</b>
+                    <span>Vui lòng sử dụng điện thoại Android thật. Test bằng giả lập không được cộng đồng chấp nhận vì không có giá trị cho mục đích thử nghiệm thiết bị thực tế.</span>
+                </div>
+            </div>
+
+            <div class="taf-thanks">
+                TRÂN TRỌNG CẢM ƠN TẤT CẢ ANH EM! ❤️<br>
+                <span style="font-size:13px;font-weight:400;">
+                    Cùng giúp nhau hoàn thành, cùng nhau phát triển!
+                </span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CỘNG ĐỒNG -->
+    <section class="taf-step taf-community">
+
+        <h3 class="taf-community-title">💙 THAM GIA CỘNG ĐỒNG TEST CHÉO</h3>
+
+        <div class="taf-community-grid">
+
+            <div class="taf-community-item">
+                <h4>🌐 Nhóm Facebook</h4>
+                <p class="taf-note">
+                    Tham gia cộng đồng để trao đổi, hỗ trợ và cập nhật thông tin.
+                </p>
+                <a class="taf-btn taf-facebook"
+                   href="https://www.facebook.com/groups/2024185674842334"
+                   target="_blank" rel="noopener">
+                    <i class="fa-solid fa-user-plus"></i> Tham gia Facebook
+                </a>
+            </div>
+
+            <div class="taf-community-item">
+                <h4>💬 Nhóm Zalo</h4>
+
+                <img src="https://nanieditorapp.github.io/img/qrnhomzalo.png"
+                     alt="QR nhóm Zalo"
+                     loading="lazy">
+
+                <p class="taf-note">
+                    Quét mã QR hoặc nhấn nút bên dưới để tham gia nhóm Zalo.
+                </p>
+
+                <a class="taf-btn taf-zalo"
+                   href="https://zalo.me/g/rj1lvi4cnh9q0xqc5kfe"
+                   target="_blank" rel="noopener">
+                    <i class="fa-solid fa-user-plus"></i> Tham gia Zalo
+                </a>
+            </div>
+
+
+                    <div class="taf-community-item">
+                <h4>🌐 Trang thống kê:</h4>
+                <p class="taf-note">
+                    https://app-vietshops.com/test-cheo-12-tester/
+                </p>
+                <a class="taf-btn taf-facebook"
+                   href="https://app-vietshops.com/test-cheo-12-tester/"
+                   target="_blank" rel="noopener">
+                   <i class="fa-solid fa-chart-line"></i> Xem chi tiết
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="taf-footer">
+        Cảm ơn các bạn đã tham gia và hỗ trợ cộng đồng 12 Tester Android! ❤️
+    </div>
+
+</div>
+
+<script>
+function tafCopyEmails(button) {
+    const emails =
+        "cong-dong-12-tester-android@googlegroups.com, haiphongapp@googlegroups.com";
+
+    const success = button.parentElement.querySelector(".taf-success");
+
+    function showSuccess() {
+        button.innerHTML= "✓ Đã sao chép";
+
+        setTimeout(function() {
+            success.textContent = "";
+            button.innerHTML= "📋 Sao chép 2 email";
+        }, 2500);
+    }
+
+    if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(emails)
+            .then(showSuccess)
+            .catch(function() {
+                tafFallbackCopy(emails, showSuccess);
+            });
+    } else {
+        tafFallbackCopy(emails, showSuccess);
+    }
+}
+
+function tafFallbackCopy(text, callback) {
+    const textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    try {
+        if (document.execCommand("copy")) {
+            callback();
+        } else {
+            alert("Không thể sao chép. Vui lòng sao chép email thủ công.");
+        }
+    } catch(e) {
+        alert("Không thể sao chép. Vui lòng sao chép email thủ công.");
+    }
+
+    document.body.removeChild(textarea);
+}
+</script>
+
+</body>
+</html>
